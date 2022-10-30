@@ -1,0 +1,28 @@
+.results {
+    width: 95%;
+    margin: auto;
+    margin-top: 95px;
+}
+
+.results .no-search {
+    width: 70%;
+    margin: auto;
+    padding-top: 1.5rem;
+    text-align: center;
+}
+
+.results .no-search p {
+    font-size: 0.9rem;
+    color: var(--text-color);
+    margin-bottom: 1rem;
+}
+
+.results .no-search a {
+    color: var(--tertiary-color);
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    background-color: var(--primary-color);
+    padding: 0.3rem 1rem;
+    border-radius: 5px;
+}

@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   selectedZone: "",
+  query: undefined,
 };
 
 export const searchSlice = createSlice({
@@ -11,9 +12,12 @@ export const searchSlice = createSlice({
     selectZone: (state, action) => {
       state.selectedZone = action.payload;
     },
+    setQuery: (state, action) => {
+      state.query = action.payload;
+    },
   },
 });
 
-export const { selectZone } = searchSlice.actions;
+export const { selectZone, setQuery } = searchSlice.actions;
 
 export default searchSlice.reducer;

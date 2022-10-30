@@ -1,0 +1,60 @@
+.tab-bar {
+    position: fixed;
+    z-index: 1;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100vw;
+    background-color: var(--secondary-color);
+    display: flex;
+    justify-content: space-evenly;
+    height: 70px;
+    box-sizing: border-box;
+    align-items: flex-end;
+    box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.15);
+}
+
+.tab-bar a:not(.search),
+.tab-bar .menu {
+    font-size: 2.2rem;
+    background-color: transparent;
+    border: none;
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    cursor: pointer;
+    color: var(--tertiary-color);
+}
+
+.tab-bar a:not(.active) svg:first-child {
+    display: block;
+}
+
+.tab-bar a:not(.active) svg:last-child {
+    display: none;
+}
+
+.tab-bar a.active svg:first-child {
+    display: none;
+}
+
+.tab-bar a.active svg:last-child {
+    display: block;
+}
+
+.tab-bar a.search {
+    cursor: pointer;
+    font-size: 2.5em;
+    background-color: var(--background-color);
+    box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.15);
+    width: 25%;
+    aspect-ratio: 1/1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    color: var(--tertiary-color);
+    margin-bottom: 5px;
+}

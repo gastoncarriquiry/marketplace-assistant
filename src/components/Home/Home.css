@@ -1,0 +1,17 @@
+.intro .search-form {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.intro .search-form>div {
+    background-color: var(--grey-color);
+    padding: 2em;
+    border-radius: 5px;
+}
+
+.intro .about {
+    width: 90%;
+    margin: auto;
+}

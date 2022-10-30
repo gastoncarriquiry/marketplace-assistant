@@ -25,6 +25,7 @@ const Menu = forwardRef((props, ref) => {
     document.addEventListener("click", handleOutsideClick);
 
     return () => document.removeEventListener("click", handleOutsideClick);
+    //eslint-disable-next-line
   }, [ref]);
 
   return (

@@ -1,4 +1,4 @@
-export const zones = [
+export const zonesList = [
   {
     id: 1,
     name: "Abayubá",

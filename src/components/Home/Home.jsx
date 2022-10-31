@@ -1,18 +1,10 @@
-import Datalist from "../Datalist/Datalist";
+import SearchForm from "../SearchForm/SearchForm";
 import "./Home.css";
 
 const Home = () => {
   return (
     <section className="intro">
-      <div className="search-form">
-        <div>
-          <label>
-            Hola
-            <input type="text" />
-          </label>
-          <Datalist />
-        </div>
-      </div>
+      <SearchForm />
       <div className="about">
         <h1>Viví MVD</h1>
         <p>

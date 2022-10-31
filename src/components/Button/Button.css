@@ -1,0 +1,29 @@
+.btn.primary {
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    background-color: var(--tertiary-color);
+    color: var(--background-color);
+    border-radius: 5px;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.5rem;
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    outline: none;
+    box-sizing: border-box;
+    border: 3px solid var(--tertiary-color);
+    transition: color 0.2s;
+    cursor: pointer;
+}
+
+.btn.primary:not(:disabled):hover {
+    color: var(--primary-color);
+}
+
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}

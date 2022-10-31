@@ -23,7 +23,7 @@ const Datalist = () => {
     setFilteredQuery(
       //eslint-disable-next-line
       zones.filter((zone) => {
-        if (zone.nombre.toLowerCase().includes(keyword)) return zone;
+        if (zone.name.toLowerCase().includes(keyword)) return zone;
       })
     );
   };
@@ -34,21 +34,25 @@ const Datalist = () => {
 
   const selectItem = (zone) => {
     query.current.value = zone.name;
-    dispatch(selectZone(zone));
+    dispatch(selectZone(zone.name.toLowerCase()));
   };
 
   return (
     <div className="combobox">
-      <label>
+      <div>
+        <label htmlFor="zone">Barrio</label>
         <input
+          id="zone"
+          className="input"
           type="text"
-          placeholder="Seleccione un barrio"
+          placeholder="Ingrese un barrio"
           ref={query}
           onKeyUp={searchResults}
+          onChange={() => dispatch(selectZone(query.current.value.toLowerCase()))}
           onFocus={toggleListbox}
           onBlur={toggleListbox}
         />
-      </label>
+      </div>
       <div className={`listbox ${open ? "open" : "closed"}`}>
         {searchQuery === ""
           ? zones

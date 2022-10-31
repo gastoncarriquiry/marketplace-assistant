@@ -2,43 +2,46 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { saveLocalStorage } from "../../utils/utils";
+import { loadLocalStorage, saveLocalStorage } from "../../utils/utils";
 import Result from "../Result/Result";
 import SkeletonLoader from "../SkeletonLoader/SkeletonLoader";
 import "./ResultsList.css";
 
 const ResultsList = () => {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [results, setResults] = useState([]);
   const query = useSelector((state) => state.search.query);
 
   useEffect(() => {
-    let resultsStorage = localStorage.getItem("results");
-    if (resultsStorage === null) {
+    setIsLoading(true);
+    let resultsStorage = loadLocalStorage("results");
+    console.log(resultsStorage);
+    if (resultsStorage === null || resultsStorage.length === 0) {
       saveLocalStorage("results", []);
+      if (query !== undefined) fetchResults(0, []);
     } else {
-      setResults(JSON.parse(resultsStorage));
+      setResults(resultsStorage);
+      setIsLoading(false);
     }
-
-    fetchResults(0, []);
+    //eslint-disable-next-line
   }, []);
 
   const fetchResults = (offset, arr) => {
-    setIsLoading(true);
-    fetch("https://api.mercadolibre.com/sites/MLU/search?q=venta casa palermo&offset=" + offset)
+    fetch(`https://api.mercadolibre.com/sites/MLU/search?q=${query}&offset=` + offset)
       .then((r) => r.json())
       .then((r) => {
+        console.log(r);
         let total = r.paging.total;
         let current = r.paging.limit + r.paging.offset;
         let currentArray = [...arr, ...r.results];
-        if (current < total) {
+        if (current < total && r.paging.offset < 100) {
           fetchResults(current, currentArray);
         } else {
           setResults(currentArray);
+          setIsLoading(false);
         }
       })
-      .catch(console.error)
-      .finally(() => setIsLoading(false));
+      .catch(console.error);
   };
 
   useEffect(() => {
@@ -49,8 +52,8 @@ const ResultsList = () => {
     <div className="results">
       {isLoading ? (
         <SkeletonLoader />
-      ) : results.length ? (
-        results.map((result) => <Result data={result} />)
+      ) : query ? (
+        results.map((result) => <Result key={result.id} data={result} />)
       ) : (
         <div className="no-search">
           <p>No ha realizado ninguna búsqueda aún. Vuelva al inicio para realizar una búsqueda.</p>

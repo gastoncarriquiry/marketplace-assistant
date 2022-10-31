@@ -1,0 +1,47 @@
+.intro .search-form {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.intro .search-form h1 {
+    font-size: 1rem;
+    color: var(--text-color);
+}
+
+.intro .search-form>div {
+    background-color: var(--grey-color);
+    padding: 2em;
+    border-radius: 5px;
+    width: 80%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+}
+
+.intro .search-form label {
+    color: var(--text-color);
+    font-size: 0.75rem;
+    margin-left: 0.2rem;
+    margin-bottom: 0.1rem;
+}
+
+.intro .search-form .input {
+    background-color: var(--background-color);
+    border-radius: 5px;
+    border: 1px solid var(--primary-color);
+    width: 100%;
+    padding: 0.5em;
+    height: 2.5rem;
+    font-size: 1rem;
+    box-sizing: border-box;
+    outline: none;
+    color: var(--text-color);
+    font-family: var(--main-font);
+}
+
+.intro .search-form .btn {
+    margin-top: 1rem;
+}

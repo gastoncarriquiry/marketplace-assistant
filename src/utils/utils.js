@@ -1,8 +1,25 @@
+/**
+ * Transforms MELI's thumbnail low-res image URL to original full-res image URL
+ * @param {string} url - MELI's thumbnail product property from fetch response
+ */
 export const transformImageUrl = (url) => {
   const hyphenIndex = url.lastIndexOf("-");
   const dotIndex = url.lastIndexOf(".");
 
   return url.substring(0, hyphenIndex + 1) + "O" + url.substring(dotIndex, url.length);
+};
+
+/**
+ * Creates a query string form separate properties
+ * @param {string} operation - operation type obtained from a select field
+ * @param {string} property - property type obtained from a select field
+ * @param {string} zone - zone obtained from a custom datalist
+ */
+export const buildQuery = (operation, property, zone) => {
+  const operationType = operation.toLowerCase();
+  const propertyType = property.toLowerCase();
+
+  return `${operationType} de ${propertyType} en ${zone}`;
 };
 
 /**

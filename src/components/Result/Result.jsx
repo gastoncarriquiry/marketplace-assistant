@@ -2,9 +2,9 @@ import { transformImageUrl } from "../../utils/utils";
 import "./Result.css";
 
 const Result = ({ data }) => {
-  const { id, title, price, currency_id, location, attributes, thumbnail } = data;
+  const { title, price, currency_id, location, attributes, thumbnail } = data;
   return (
-    <article key={id} className="result">
+    <article className="result">
       <img src={transformImageUrl(thumbnail)} alt="" />
       <h2>{title}</h2>
       <p>

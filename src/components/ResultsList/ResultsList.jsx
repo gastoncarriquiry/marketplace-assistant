@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { loadLocalStorage, saveLocalStorage } from "../../utils/utils";
+import { buildUrl, loadLocalStorage, saveLocalStorage } from "../../utils/utils";
 import Result from "../Result/Result";
 import SkeletonLoader from "../SkeletonLoader/SkeletonLoader";
 import "./ResultsList.css";
@@ -15,7 +15,6 @@ const ResultsList = () => {
   useEffect(() => {
     setIsLoading(true);
     let resultsStorage = loadLocalStorage("results");
-    console.log(resultsStorage);
     if (resultsStorage === null || resultsStorage.length === 0) {
       saveLocalStorage("results", []);
       if (query !== undefined) fetchResults(0, []);
@@ -27,13 +26,19 @@ const ResultsList = () => {
   }, []);
 
   const fetchResults = (offset, arr) => {
-    fetch(`https://api.mercadolibre.com/sites/MLU/search?q=${query}&offset=` + offset)
+    const url = "https://api.mercadolibre.com/sites/MLU/search?";
+    const params = {
+      q: query,
+      offset,
+    };
+
+    fetch(buildUrl(url, params))
       .then((r) => r.json())
       .then((r) => {
-        console.log(r);
         let total = r.paging.total;
         let current = r.paging.limit + r.paging.offset;
         let currentArray = [...arr, ...r.results];
+        //TODO: work on offset limit
         if (current < total && r.paging.offset < 100) {
           fetchResults(current, currentArray);
         } else {

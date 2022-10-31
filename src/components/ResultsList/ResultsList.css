@@ -1,7 +1,10 @@
 .results {
-    width: 95%;
+    width: 90%;
     margin: auto;
-    margin-top: 95px;
+    margin-top: 7rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
 }
 
 .results .no-search {

@@ -1,7 +1,7 @@
 import "./FavoriteResults.css";
 
 const Favorites = () => {
-  return <div>Favorites</div>;
+  return <div>FavoriteResults</div>;
 };
 
 export default Favorites;

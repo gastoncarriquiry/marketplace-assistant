@@ -56,7 +56,7 @@ const ResultsList = () => {
   return (
     <div className="results">
       {isLoading ? (
-        <SkeletonLoader />
+        <SkeletonLoader type="result" />
       ) : query ? (
         results.map((result) => <Result key={result.id} data={result} />)
       ) : (

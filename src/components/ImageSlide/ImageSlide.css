@@ -1,0 +1,5 @@
+.swiper-lazy-preloader {
+    border-color: var(--primary-color);
+    border-top-color: transparent;
+    filter: drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.25));
+}

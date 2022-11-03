@@ -24,8 +24,8 @@
 }
 
 .result a img {
-    width: 100%;
-    box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.15);
+    width: auto;
+    max-height: 16.5em;
 }
 
 .result a small {
@@ -52,6 +52,10 @@
 
 .result a .img {
     position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.15);
 }
 
 .result a .img .tag {

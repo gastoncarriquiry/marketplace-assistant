@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { buildUrl, loadLocalStorage, saveLocalStorage } from "../../utils/utils";
+import { apiToJson, buildUrl, loadLocalStorage, saveLocalStorage } from "../../utils/utils";
 import Result from "../Result/Result";
 import SkeletonLoader from "../SkeletonLoader/SkeletonLoader";
 import "./ResultsList.css";
@@ -33,7 +33,7 @@ const ResultsList = () => {
     };
 
     fetch(buildUrl(url, params))
-      .then((r) => r.json())
+      .then(apiToJson)
       .then((r) => {
         let total = r.paging.total;
         let current = r.paging.limit + r.paging.offset;

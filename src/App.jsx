@@ -19,7 +19,7 @@ function App() {
           <Route exact path="/" element={<UI />}>
             <Route path="/" element={<Home />} />
             <Route path="resultados" element={<SearchResults />} />
-            <Route path="item/:title" element={<ItemDetail />} />
+            <Route path="inmueble/:id" element={<ItemDetail />} />
             <Route path="favoritos" element={<FavoriteResults />} />
             <Route path="ignorados" element={<IgnoredResults />} />
           </Route>

@@ -17,6 +17,7 @@
     border: 3px solid var(--tertiary-color);
     transition: color 0.2s;
     cursor: pointer;
+    padding: 0.5rem 1rem;
 }
 
 .btn.primary:not(:disabled):hover {

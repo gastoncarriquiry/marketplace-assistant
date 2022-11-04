@@ -24,12 +24,13 @@ const ActionButtons = () => {
   if (actionBar.current) window.onscroll = () => {};
 
   const handleClick = (e) => {
-    e.target.classList.toggle("selected");
-    if (e.target.classList.contains("favorite")) {
+    if (favoriteBtn.current.contains(e.target)) {
+      favoriteBtn.current.classList.toggle("selected");
       notInterestedBtn.current.classList.remove("selected");
       //TODO: favorite item
     }
-    if (e.target.classList.contains("not-interested")) {
+    if (notInterestedBtn.current.contains(e.target)) {
+      notInterestedBtn.current.classList.toggle("selected");
       favoriteBtn.current.classList.remove("selected");
       //TODO: item not of interest
     }

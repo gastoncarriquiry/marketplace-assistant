@@ -1,8 +1,12 @@
+import { useRef } from "react";
+import { IoBan, IoBanOutline, IoHeart, IoHeartOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import { transformImageUrl } from "../../utils/utils";
 import "./Result.css";
 
 const Result = ({ data }) => {
+  const favoriteBtn = useRef(null);
+  const notInterestedBtn = useRef(null);
   const { id, title, price, currency_id, location, attributes, thumbnail, condition } = data;
   const totalArea = attributes.find((attribute) => attribute.id === "TOTAL_AREA");
   const bathrooms = attributes.find((attribute) => attribute.id === "FULL_BATHROOMS");
@@ -12,6 +16,19 @@ const Result = ({ data }) => {
     if (bedrooms) return Number(bedrooms.value_name);
     else if (rooms) return Number(rooms.value_name);
     else return 0;
+  };
+
+  const handleClick = (e) => {
+    if (favoriteBtn.current.contains(e.target)) {
+      favoriteBtn.current.classList.toggle("selected");
+      notInterestedBtn.current.classList.remove("selected");
+      //TODO: favorite item
+    }
+    if (notInterestedBtn.current.contains(e.target)) {
+      notInterestedBtn.current.classList.toggle("selected");
+      favoriteBtn.current.classList.remove("selected");
+      //TODO: item not of interest
+    }
   };
 
   return (
@@ -52,6 +69,16 @@ const Result = ({ data }) => {
           )}
         </div>
       </Link>
+      <div className="actions">
+        <button className="favorite" ref={favoriteBtn} onClick={handleClick}>
+          <IoHeartOutline />
+          <IoHeart />
+        </button>
+        <button className="not-interested" ref={notInterestedBtn} onClick={handleClick}>
+          <IoBanOutline />
+          <IoBan />
+        </button>
+      </div>
     </article>
   );
 };

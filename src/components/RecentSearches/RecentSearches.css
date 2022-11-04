@@ -1,5 +1,48 @@
 .intro .recent-searches {
-    width: 90%;
-    margin: auto;
     margin-bottom: 2rem;
+}
+
+.intro .recent-searches .swiper-slide {
+    width: fit-content !important;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.intro .recent-searches h2 {
+    margin-bottom: 1rem;
+    margin-left: 5%;
+}
+
+.intro .recent-searches .swiper {
+    padding-left: 5%;
+    height: 80px;
+}
+
+.intro .recent-searches .swiper::before {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 5%;
+    height: 100px;
+    background: rgb(251, 255, 251);
+    background: linear-gradient(-90deg, rgba(251, 255, 251, 0) 0%, rgba(251, 255, 251, 1) 100%);
+    left: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 2;
+}
+
+.intro .recent-searches .swiper::after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 5%;
+    height: 100px;
+    background: rgb(251, 255, 251);
+    background: linear-gradient(90deg, rgba(251, 255, 251, 0) 0%, rgba(251, 255, 251, 1) 100%);
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 2;
 }

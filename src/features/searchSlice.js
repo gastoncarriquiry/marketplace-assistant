@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   selectedZone: "",
   query: undefined,
+  recentSearches: [],
 };
 
 export const searchSlice = createSlice({
@@ -15,9 +16,15 @@ export const searchSlice = createSlice({
     setQuery: (state, action) => {
       state.query = action.payload;
     },
+    setRecentSearches: (state, action) => {
+      state.recentSearches = action.payload;
+    },
+    addRecentSearch: (state, action) => {
+      state.recentSearches.push(action.payload);
+    },
   },
 });
 
-export const { selectZone, setQuery } = searchSlice.actions;
+export const { selectZone, setQuery, setRecentSearches, addRecentSearch } = searchSlice.actions;
 
 export default searchSlice.reducer;

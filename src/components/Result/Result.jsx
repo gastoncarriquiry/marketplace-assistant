@@ -10,7 +10,8 @@ const Result = ({ data }) => {
     const bedrooms = attributes.find((attribute) => attribute.id === "BEDROOMS");
     const rooms = attributes.find((attribute) => attribute.id === "ROOMS");
     if (bedrooms) return Number(bedrooms.value_name);
-    else return Number(rooms.value_name);
+    else if (rooms) return Number(rooms.value_name);
+    else return 0;
   };
 
   return (
@@ -22,8 +23,21 @@ const Result = ({ data }) => {
         </div>
         <div className="info">
           <small>
-            {totalArea.value_name} totales | {bathrooms.value_name} baños{" "}
-            {bedrooms() !== 0 ? <>| {bedrooms()} dormitorios</> : <></>}
+            {totalArea.value_name} totales{" "}
+            {bathrooms ? (
+              <>
+                | {bathrooms.value_name} {Number(bathrooms.value_name) > 1 ? "baños" : "baño"}
+              </>
+            ) : (
+              <></>
+            )}{" "}
+            {bedrooms() !== 0 ? (
+              <>
+                | {bedrooms()} {bedrooms() > 1 ? "dormitorios" : "dormitorio"}
+              </>
+            ) : (
+              <></>
+            )}
           </small>
           <h2 className="price">
             {currency_id} {price}

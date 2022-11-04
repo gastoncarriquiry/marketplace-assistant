@@ -63,3 +63,13 @@ export const buildUrl = (url, params) => {
 
   return urlObj;
 };
+
+export const formatDate = (rawDate) => {
+  const date = new Date(rawDate);
+  let day = String(date.getDate()).padStart(2, "0");
+  let month = String(date.getMonth() + 1).padStart(2, "0");
+  let year = String(date.getFullYear());
+  let hours = String(date.getHours()).padStart(2, "0");
+  let minutes = String(date.getMinutes()).padStart(2, "0");
+  return `${day}/${month}/${year} - ${hours}:${minutes}`;
+};

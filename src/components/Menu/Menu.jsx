@@ -30,7 +30,11 @@ const Menu = forwardRef((props, ref) => {
 
   return (
     <div ref={menu} className={`menu-list ${menuState ? "deployed" : "retracted"}`}>
-      Menu
+      <ul>
+        <li>Ir a inicio</li>
+        <li>Mostrar descartados</li>
+        <li>Eliminar datos</li>
+      </ul>
     </div>
   );
 });

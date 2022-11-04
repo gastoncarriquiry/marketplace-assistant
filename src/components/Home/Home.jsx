@@ -1,3 +1,4 @@
+import RecentSearches from "../RecentSearches/RecentSearches";
 import SearchForm from "../SearchForm/SearchForm";
 import "./Home.css";
 
@@ -5,6 +6,7 @@ const Home = () => {
   return (
     <section className="intro">
       <SearchForm />
+      <RecentSearches />
       <div className="about">
         <h1>Viví MVD</h1>
         <p>

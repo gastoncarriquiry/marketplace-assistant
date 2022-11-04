@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useRef } from "react";
 import { IoBan, IoBanOutline, IoHeart, IoHeartOutline } from "react-icons/io5";
 import "./ActionButtons.css";
@@ -7,11 +8,20 @@ const ActionButtons = () => {
   const notInterestedBtn = useRef(null);
   const actionBar = useRef(null);
 
-  window.onscroll = () => {
-    if (document.body.scrollTop > 400 || document.documentElement.scrollTop > 400)
-      actionBar.current.classList.add("fixed-top");
-    else actionBar.current.classList.remove("fixed-top");
-  };
+  useEffect(() => {
+    const handleScroll = () => {
+      if (document.body.scrollTop > 400 || document.documentElement.scrollTop > 400)
+        actionBar.current.classList.add("fixed-top");
+      else actionBar.current.classList.remove("fixed-top");
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [actionBar]);
+
+  if (actionBar.current) window.onscroll = () => {};
 
   const handleClick = (e) => {
     e.target.classList.toggle("selected");

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { setQuery } from "../../features/searchSlice";
+import { addRecentSearch, setQuery } from "../../features/searchSlice";
 import { buildQuery, saveLocalStorage } from "../../utils/utils";
 import Button from "../Button/Button";
 import Datalist from "../Datalist/Datalist";
@@ -10,6 +10,7 @@ import "./SearchForm.css";
 const SearchForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const recentSearches = useSelector((state) => state.search.recentSearches);
   const zone = useSelector((state) => state.search.selectedZone);
   const [isDisabled, setIsDisabled] = useState(false);
   const opType = useRef(null);
@@ -19,8 +20,19 @@ const SearchForm = () => {
     zone !== "" ? setIsDisabled(false) : setIsDisabled(true);
   }, [zone]);
 
+  useEffect(() => {
+    setTimeout(() => saveLocalStorage("recentSearches", recentSearches), 10000);
+  }, [recentSearches]);
+
   const handleSearch = () => {
     saveLocalStorage("results", []);
+    dispatch(
+      addRecentSearch({
+        id: recentSearches.length + 1,
+        date: new Date().getTime(),
+        query: buildQuery(opType.current.value, propType.current.value, zone),
+      })
+    );
     dispatch(setQuery(buildQuery(opType.current.value, propType.current.value, zone)));
     navigate("/resultados");
   };

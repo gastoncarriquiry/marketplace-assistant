@@ -11,14 +11,14 @@ const SkeletonLoader = ({ type }) => {
       <br />
       <Skeleton width={200} height={35} />
       <br />
-      <Skeleton width={350} />
+      <Skeleton />
       <Skeleton width={150} />
       <br />
-      <Skeleton width={325} />
+      <Skeleton />
     </div>
   ) : (
     <div className="item-skeleton">
-      <Skeleton width={375} height={50} />
+      <Skeleton height={50} />
       <br />
       <Skeleton height={315} />
       <Skeleton height={50} />

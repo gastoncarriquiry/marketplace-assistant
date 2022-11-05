@@ -4,9 +4,12 @@
     right: -70vw;
     bottom: 0;
     height: 100%;
+    box-sizing: border-box;
+    padding-top: 6rem;
     background-color: var(--grey-color);
     box-shadow: -2px 0px 5px 2px rgba(0, 0, 0, 0.25);
     width: 70vw;
+    z-index: 998;
 }
 
 .menu-list.deployed {

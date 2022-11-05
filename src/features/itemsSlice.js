@@ -2,13 +2,21 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   favoriteItems: [],
+  favoriteGroups: [],
   discardedItems: [],
+  selectedGroup: undefined,
 };
 
 export const itemsSlice = createSlice({
   name: "items",
   initialState,
   reducers: {
+    setSelectedGroup: (state, action) => {
+      state.selectedGroup = action.payload;
+    },
+    addFavoriteGroup: (state, action) => {
+      state.favoriteGroups.push(action.payload);
+    },
     setFavoriteItems: (state, action) => {
       state.favoriteItems = action.payload;
     },
@@ -39,6 +47,8 @@ export const {
   addFavoriteItem,
   removeDiscardedItem,
   removeFavoriteItem,
+  addFavoriteGroup,
+  setSelectedGroup,
 } = itemsSlice.actions;
 
 export default itemsSlice.reducer;

@@ -1,0 +1,31 @@
+.favorite-results {
+    width: 90%;
+    margin: auto;
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.favorite-results .no-items {
+    width: 70%;
+    margin: auto;
+    padding-top: 1.5rem;
+    text-align: center;
+}
+
+.favorite-results .no-items p {
+    font-size: 0.9rem;
+    color: var(--text-color);
+    margin-bottom: 1rem;
+}
+
+.favorite-results .no-items a {
+    color: var(--tertiary-color);
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    background-color: var(--primary-color);
+    padding: 0.3rem 1rem;
+    border-radius: 5px;
+}

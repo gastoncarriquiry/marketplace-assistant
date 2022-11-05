@@ -4,12 +4,16 @@ const initialState = {
   selectedZone: "",
   query: undefined,
   recentSearches: [],
+  preventReload: false,
 };
 
 export const searchSlice = createSlice({
   name: "search",
   initialState,
   reducers: {
+    setPreventReload: (state, action) => {
+      state.preventReload = action.payload;
+    },
     selectZone: (state, action) => {
       state.selectedZone = action.payload;
     },
@@ -25,6 +29,7 @@ export const searchSlice = createSlice({
   },
 });
 
-export const { selectZone, setQuery, setRecentSearches, addRecentSearch } = searchSlice.actions;
+export const { selectZone, setQuery, setRecentSearches, addRecentSearch, setPreventReload } =
+  searchSlice.actions;
 
 export default searchSlice.reducer;

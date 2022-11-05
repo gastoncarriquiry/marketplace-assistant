@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { addRecentSearch, setQuery } from "../../features/searchSlice";
+import { addRecentSearch, setPreventReload, setQuery } from "../../features/searchSlice";
 import { buildQuery, saveLocalStorage } from "../../utils/utils";
 import Button from "../Button/Button";
 import Datalist from "../Datalist/Datalist";
@@ -11,6 +11,7 @@ const SearchForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const recentSearches = useSelector((state) => state.search.recentSearches);
+  const preventReload = useSelector((state) => state.search.preventReload);
   const zone = useSelector((state) => state.search.selectedZone);
   const [isDisabled, setIsDisabled] = useState(false);
   const opType = useRef(null);
@@ -21,10 +22,13 @@ const SearchForm = () => {
   }, [zone]);
 
   useEffect(() => {
-    setTimeout(() => saveLocalStorage("recentSearches", recentSearches), 10000);
+    setTimeout(() => {
+      if (preventReload) saveLocalStorage("recentSearches", recentSearches);
+    }, 1000);
   }, [recentSearches]);
 
   const handleSearch = () => {
+    dispatch(setPreventReload(true));
     saveLocalStorage("results", []);
     dispatch(
       addRecentSearch({

@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useState } from "react";
+import { IoChevronBack } from "react-icons/io5";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { loadLocalStorage, saveLocalStorage } from "../../utils/utils";
@@ -29,7 +30,18 @@ const Favorites = () => {
   }, [favoriteGroupsState]);
 
   return (
-    <div className="favorite-results">
+    <section className="favorite-results">
+      <header>
+        <Link to="/">
+          <button>
+            <IoChevronBack />
+            Volver al inicio
+          </button>
+        </Link>
+        <hr />
+        <h1>Favoritos</h1>
+      </header>
+      <h2>Colecciones</h2>
       {isLoading ? (
         <SkeletonLoader type="result" />
       ) : favoriteGroups.length ? (
@@ -43,7 +55,7 @@ const Favorites = () => {
           <Link to="/">Ir a inicio</Link>
         </div>
       )}
-    </div>
+    </section>
   );
 };
 

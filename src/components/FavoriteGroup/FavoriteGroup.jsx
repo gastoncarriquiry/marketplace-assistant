@@ -10,6 +10,7 @@ const FavoriteGroup = ({ data }) => {
   const favoriteItems = useSelector((state) => state.items.favoriteItems);
   const [filteredFavorites, setFilteredFavorites] = useState([]);
   const preventReload = useSelector((state) => state.items.preventReload);
+  const [isDeployed, setIsDeployed] = useState(false);
 
   useEffect(() => {
     if (preventReload) saveLocalStorage("favoriteItems", favoriteItems);
@@ -25,12 +26,16 @@ const FavoriteGroup = ({ data }) => {
     }
   }, [favoriteItems]);
 
+  const toggleDisplay = () => {
+    setIsDeployed(!isDeployed);
+  };
+
   return (
-    <div className="favorite-group">
-      <button className="dropdown">
+    <div className={`favorite-group ${isDeployed ? "deployed" : "retracted"}`}>
+      <button className="dropdown" onClick={toggleDisplay}>
         {data.name} <IoChevronDown />
       </button>
-      <div className="group-favorites">
+      <div className="group-list">
         {filteredFavorites.length ? (
           filteredFavorites.map((item) => <Result key={item.id} data={item} />)
         ) : (

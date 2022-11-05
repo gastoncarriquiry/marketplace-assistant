@@ -30,6 +30,9 @@ const ActionButtons = ({ data }) => {
     const favoriteItems = loadLocalStorage("favoriteItems");
     const discardedItems = loadLocalStorage("discardedItems");
 
+    if (!favoriteItems) favoriteItems = [];
+    if (!discardedItems) discardedItems = [];
+
     const isInFavorites = favoriteItems.find((item) => item.id === data.id);
     const isInDiscarded = discardedItems.find((item) => item.id === data.id);
 

@@ -11,10 +11,12 @@ const ResultsList = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [results, setResults] = useState([]);
   const query = useSelector((state) => state.search.query);
+  const favoriteItems = useSelector((state) => state.items.favoriteItems);
+  const discardedItems = useSelector((state) => state.items.discardedItems);
 
   useEffect(() => {
     setIsLoading(true);
-    let resultsStorage = loadLocalStorage("results");
+    const resultsStorage = loadLocalStorage("results");
     if (resultsStorage === null || resultsStorage.length === 0) {
       saveLocalStorage("results", []);
       if (query !== "") fetchResults(0, []);
@@ -24,6 +26,22 @@ const ResultsList = () => {
     }
     //eslint-disable-next-line
   }, []);
+
+  useEffect(() => {
+    console.log(loadLocalStorage("results"));
+    if (favoriteItems && discardedItems) {
+      const mergedArray = [...favoriteItems, ...discardedItems];
+      const resultsArray = loadLocalStorage("results");
+      for (let i = resultsArray.length - 1; i >= 0; i--) {
+        for (let j = 0; j < mergedArray.length; j++) {
+          if (resultsArray[i] && resultsArray[i].id === mergedArray[j].id) {
+            resultsArray.splice(i, 1);
+          }
+        }
+      }
+      setResults(resultsArray);
+    }
+  }, [favoriteItems, discardedItems]);
 
   const fetchResults = (offset, arr) => {
     const url = "https://api.mercadolibre.com/sites/MLU/search?";
@@ -43,15 +61,12 @@ const ResultsList = () => {
           fetchResults(current, currentArray);
         } else {
           setResults(currentArray);
+          saveLocalStorage("results", currentArray);
           setIsLoading(false);
         }
       })
       .catch(console.error);
   };
-
-  useEffect(() => {
-    if (results.length) saveLocalStorage("results", results);
-  }, [results]);
 
   return (
     <div className="results">

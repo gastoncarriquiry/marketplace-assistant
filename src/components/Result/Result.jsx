@@ -28,8 +28,11 @@ const Result = ({ data }) => {
   const discardedItems = useSelector((state) => state.items.discardedItems);
 
   useEffect(() => {
-    const favoriteItems = loadLocalStorage("favoriteItems");
-    const discardedItems = loadLocalStorage("discardedItems");
+    let favoriteItems = loadLocalStorage("favoriteItems");
+    let discardedItems = loadLocalStorage("discardedItems");
+
+    if (!favoriteItems) favoriteItems = [];
+    if (!discardedItems) discardedItems = [];
 
     const isInFavorites = favoriteItems.find((item) => item.id === data.id);
     const isInDiscarded = discardedItems.find((item) => item.id === data.id);

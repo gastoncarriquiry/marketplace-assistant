@@ -29,9 +29,9 @@ const RecentSearchButton = ({ data }) => {
         <p>"{data.query}"</p>
         <small>{formatDate(data.date)}</small>
       </span>
-      <span className="delete" onClick={deleteSearch}>
+      <div className="delete" onClick={deleteSearch}>
         <IoClose />
-      </span>
+      </div>
     </button>
   );
 };

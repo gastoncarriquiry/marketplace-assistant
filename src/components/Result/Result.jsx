@@ -2,13 +2,14 @@ import { useRef } from "react";
 import { IoBan, IoBanOutline, IoHeart, IoHeartOutline } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { transformImageUrl } from "../../utils/utils";
+import { loadLocalStorage, transformImageUrl } from "../../utils/utils";
 import "./Result.css";
 import {
   addDiscardedItem,
   addFavoriteItem,
   removeDiscardedItem,
   removeFavoriteItem,
+  setPreventReload,
 } from "../../features/itemsSlice";
 import { useState } from "react";
 import { useEffect } from "react";
@@ -27,14 +28,17 @@ const Result = ({ data }) => {
   const discardedItems = useSelector((state) => state.items.discardedItems);
 
   useEffect(() => {
+    const favoriteItems = loadLocalStorage("favoriteItems");
+    const discardedItems = loadLocalStorage("discardedItems");
+
     const isInFavorites = favoriteItems.find((item) => item.id === data.id);
-    const isInDiscarded = discardedItems.find((item) => item.id === data.id);
+    // const isInDiscarded = discardedItems.find((item) => item.id === data.id);
 
     if (isInFavorites) setIsFavorite(true);
     else setIsFavorite(false);
 
-    if (isInDiscarded) setIsDiscarded(true);
-    else setIsDiscarded(false);
+    // if (isInDiscarded) setIsDiscarded(true);
+    // else setIsDiscarded(false);
   }, [favoriteItems, discardedItems, data.id]);
 
   const totalArea = attributes.find((attribute) => attribute.id === "TOTAL_AREA");
@@ -48,6 +52,7 @@ const Result = ({ data }) => {
   };
 
   const handleClick = (e) => {
+    dispatch(setPreventReload(true));
     if (favoriteBtn.current.contains(e.target)) {
       if (favoriteBtn.current.classList.contains("selected")) {
         dispatch(removeFavoriteItem(data.id));

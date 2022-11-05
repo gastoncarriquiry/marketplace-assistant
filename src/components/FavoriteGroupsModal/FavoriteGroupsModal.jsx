@@ -1,11 +1,13 @@
+import { useEffect } from "react";
 import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addFavoriteGroup,
   addFavoriteItem,
   removeDiscardedItem,
-  setSelectedGroup,
+  setPreventReload,
 } from "../../features/itemsSlice";
+import { saveLocalStorage } from "../../utils/utils";
 import Button from "../Button/Button";
 import "./FavoriteGroupsModal.css";
 
@@ -15,6 +17,10 @@ const FavoriteGroupsModal = ({ data, isVisible }) => {
   const input = useRef(null);
   const select = useRef(null);
   const modalContainer = useRef(null);
+
+  useEffect(() => {
+    if (favoriteGroups.length) saveLocalStorage("favoriteGroups", favoriteGroups);
+  }, [favoriteGroups]);
 
   const handleClick = () => {
     if (input.current.value == "") {
@@ -43,6 +49,12 @@ const FavoriteGroupsModal = ({ data, isVisible }) => {
           },
         })
       );
+      dispatch(
+        addFavoriteGroup({
+          id: favoriteGroups.length + 1,
+          name: input.current.value,
+        })
+      );
       dispatch(removeDiscardedItem(data.id));
       input.current.value = "";
       modalContainer.current.classList.add("hidden");
@@ -57,10 +69,17 @@ const FavoriteGroupsModal = ({ data, isVisible }) => {
         <div>
           <label htmlFor="existent-groups">Elija alguna de las colecciones existentes</label>
           <select id="existent-groups" ref={select}>
+            <option value={0} selected disabled>
+              -- Selecione una colección --
+            </option>
             {favoriteGroups.length ? (
-              favoriteGroups.map((group) => <option value={group.id}>{group.name}</option>)
+              favoriteGroups.map((group) => (
+                <option key={group.id} value={group.id}>
+                  {group.name}
+                </option>
+              ))
             ) : (
-              <option value={0} selected disabled>
+              <option value={0} disabled>
                 -- No hay colecciones aún --
               </option>
             )}

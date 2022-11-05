@@ -2,17 +2,17 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   favoriteItems: [],
+  preventReload: false,
   favoriteGroups: [],
   discardedItems: [],
-  selectedGroup: undefined,
 };
 
 export const itemsSlice = createSlice({
   name: "items",
   initialState,
   reducers: {
-    setSelectedGroup: (state, action) => {
-      state.selectedGroup = action.payload;
+    setPreventReload: (state, action) => {
+      state.preventReload = action.payload;
     },
     addFavoriteGroup: (state, action) => {
       state.favoriteGroups.push(action.payload);
@@ -48,7 +48,7 @@ export const {
   removeDiscardedItem,
   removeFavoriteItem,
   addFavoriteGroup,
-  setSelectedGroup,
+  setPreventReload,
 } = itemsSlice.actions;
 
 export default itemsSlice.reducer;

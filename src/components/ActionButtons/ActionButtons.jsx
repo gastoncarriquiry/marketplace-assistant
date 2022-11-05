@@ -5,12 +5,14 @@ import {
   addFavoriteItem,
   removeDiscardedItem,
   removeFavoriteItem,
+  setPreventReload,
 } from "../../features/itemsSlice";
 import { IoBan, IoBanOutline, IoHeart, IoHeartOutline } from "react-icons/io5";
 import "./ActionButtons.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import FavoriteGroupsModal from "../FavoriteGroupsModal/FavoriteGroupsModal";
+import { loadLocalStorage } from "../../utils/utils";
 
 const ActionButtons = ({ data }) => {
   const favoriteBtn = useRef(null);
@@ -25,14 +27,17 @@ const ActionButtons = ({ data }) => {
   const discardedItems = useSelector((state) => state.items.discardedItems);
 
   useEffect(() => {
+    const favoriteItems = loadLocalStorage("favoriteItems");
+    const discardedItems = loadLocalStorage("discardedItems");
+
     const isInFavorites = favoriteItems.find((item) => item.id === data.id);
-    const isInDiscarded = discardedItems.find((item) => item.id === data.id);
+    // const isInDiscarded = discardedItems.find((item) => item.id === data.id);
 
     if (isInFavorites) setIsFavorite(true);
     else setIsFavorite(false);
 
-    if (isInDiscarded) setIsDiscarded(true);
-    else setIsDiscarded(false);
+    // if (isInDiscarded) setIsDiscarded(true);
+    // else setIsDiscarded(false);
   }, [favoriteItems, discardedItems, data.id]);
 
   useEffect(() => {
@@ -49,6 +54,7 @@ const ActionButtons = ({ data }) => {
   }, [actionBar]);
 
   const handleClick = (e) => {
+    dispatch(setPreventReload(true));
     if (favoriteBtn.current.contains(e.target)) {
       if (favoriteBtn.current.classList.contains("selected")) {
         dispatch(removeFavoriteItem(data.id));

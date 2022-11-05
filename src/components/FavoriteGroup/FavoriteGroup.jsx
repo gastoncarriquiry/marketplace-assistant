@@ -8,8 +8,8 @@ import "./FavoriteGroup.css";
 
 const FavoriteGroup = ({ data }) => {
   const favoriteItems = useSelector((state) => state.items.favoriteItems);
-  const [filteredFavorites, setFilteredFavorites] = useState([]);
   const preventReload = useSelector((state) => state.items.preventReload);
+  const [filteredFavorites, setFilteredFavorites] = useState([]);
   const [isDeployed, setIsDeployed] = useState(false);
 
   useEffect(() => {

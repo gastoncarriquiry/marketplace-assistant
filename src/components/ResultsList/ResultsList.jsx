@@ -17,7 +17,7 @@ const ResultsList = () => {
     let resultsStorage = loadLocalStorage("results");
     if (resultsStorage === null || resultsStorage.length === 0) {
       saveLocalStorage("results", []);
-      if (query !== undefined) fetchResults(0, []);
+      if (query !== "") fetchResults(0, []);
     } else {
       setResults(resultsStorage);
       setIsLoading(false);
@@ -57,7 +57,7 @@ const ResultsList = () => {
     <div className="results">
       {isLoading ? (
         <SkeletonLoader type="result" />
-      ) : query ? (
+      ) : results.length ? (
         results.map((result) => <Result key={result.id} data={result} />)
       ) : (
         <div className="no-search">

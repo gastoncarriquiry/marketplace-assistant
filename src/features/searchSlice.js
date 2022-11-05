@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   selectedZone: "",
-  query: undefined,
+  query: "",
   recentSearches: [],
   preventReload: false,
 };

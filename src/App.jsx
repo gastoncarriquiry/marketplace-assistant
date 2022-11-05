@@ -21,7 +21,7 @@ function App() {
             <Route path="resultados" element={<SearchResults />} />
             <Route path="inmueble/:id" element={<ItemDetail />} />
             <Route path="favoritos" element={<FavoriteResults />} />
-            <Route path="ignorados" element={<IgnoredResults />} />
+            <Route path="descartados" element={<IgnoredResults />} />
           </Route>
 
           <Route path="/*" element={<Navigate to="/error404" />} />

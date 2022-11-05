@@ -1,11 +1,22 @@
+import { useState } from "react";
+import { useEffect } from "react";
 import { IoChevronBack } from "react-icons/io5";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { loadLocalStorage, saveLocalStorage } from "../../utils/utils";
 import ResultsList from "../ResultsList/ResultsList";
 import "./SearchResults.css";
 
 const SearchResults = () => {
-  const query = useSelector((state) => state.search.query);
+  const queryState = useSelector((state) => state.search.query);
+  const [query, setQuery] = useState("");
+
+  useEffect(() => {
+    if (queryState !== "") {
+      saveLocalStorage("query", queryState);
+    }
+    setQuery(loadLocalStorage("query"));
+  }, [queryState]);
 
   return (
     <section className="search-results">

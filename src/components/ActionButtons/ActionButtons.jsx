@@ -31,14 +31,14 @@ const ActionButtons = ({ data }) => {
     const discardedItems = loadLocalStorage("discardedItems");
 
     const isInFavorites = favoriteItems.find((item) => item.id === data.id);
-    // const isInDiscarded = discardedItems.find((item) => item.id === data.id);
+    const isInDiscarded = discardedItems.find((item) => item.id === data.id);
 
     if (isInFavorites) setIsFavorite(true);
     else setIsFavorite(false);
 
-    // if (isInDiscarded) setIsDiscarded(true);
-    // else setIsDiscarded(false);
-  }, [favoriteItems, discardedItems, data.id]);
+    if (isInDiscarded) setIsDiscarded(true);
+    else setIsDiscarded(false);
+  }, [data.id, favoriteItems, discardedItems]);
 
   useEffect(() => {
     const handleScroll = () => {

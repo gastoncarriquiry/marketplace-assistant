@@ -2,6 +2,7 @@ import { forwardRef } from "react";
 import { useEffect } from "react";
 import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { toggleMenuState } from "../../features/menuSlice";
 import "./Menu.css";
 
@@ -32,7 +33,9 @@ const Menu = forwardRef((props, ref) => {
     <div ref={menu} className={`menu-list ${menuState ? "deployed" : "retracted"}`}>
       <ul>
         <li>Ir a inicio</li>
-        <li>Mostrar descartados</li>
+        <li>
+          <Link to="/descartados">Mostrar descartados</Link>
+        </li>
         <li>Eliminar datos</li>
       </ul>
     </div>

@@ -1,0 +1,72 @@
+.ignored-results header {
+    box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.15);
+    background-color: var(--secondary-color);
+    padding: 0.5rem;
+    position: fixed;
+    right: 0;
+    left: 0;
+    top: 0;
+    z-index: 999;
+}
+
+.ignored-results header a {
+    text-decoration: none;
+}
+
+.ignored-results header button {
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    border: none;
+    color: var(--tertiary-color);
+    cursor: pointer;
+    column-gap: 0.3rem;
+    padding: 0.2rem 0;
+}
+
+.ignored-results header button:hover {
+    color: var(--background-color);
+}
+
+.ignored-results header hr {
+    margin: 0.3rem 0;
+}
+
+.ignored-results header h1 {
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.ignored-results {
+    width: 90%;
+    margin: auto;
+    margin-top: 6rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.ignored-results .no-items {
+    width: 70%;
+    margin: auto;
+    padding-top: 1.5rem;
+    text-align: center;
+}
+
+.ignored-results .no-items p {
+    font-size: 0.9rem;
+    color: var(--text-color);
+    margin-bottom: 1rem;
+}
+
+.ignored-results .no-items a {
+    color: var(--tertiary-color);
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    background-color: var(--primary-color);
+    padding: 0.3rem 1rem;
+    border-radius: 5px;
+}

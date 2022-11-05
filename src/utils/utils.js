@@ -64,6 +64,10 @@ export const buildUrl = (url, params) => {
   return urlObj;
 };
 
+/**
+ * Formats dates to dd/mm/yyyy - hh:mm
+ * @param {string} rawDate - UNIX Timestamp
+ */
 export const formatDate = (rawDate) => {
   const date = new Date(rawDate);
   let day = String(date.getDate()).padStart(2, "0");

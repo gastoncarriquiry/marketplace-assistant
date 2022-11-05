@@ -1,12 +1,37 @@
 import { useEffect } from "react";
 import { useRef } from "react";
+import {
+  addDiscardedItem,
+  addFavoriteItem,
+  removeDiscardedItem,
+  removeFavoriteItem,
+} from "../../features/itemsSlice";
 import { IoBan, IoBanOutline, IoHeart, IoHeartOutline } from "react-icons/io5";
 import "./ActionButtons.css";
+import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
 
-const ActionButtons = () => {
+const ActionButtons = ({ data }) => {
   const favoriteBtn = useRef(null);
   const notInterestedBtn = useRef(null);
   const actionBar = useRef(null);
+  const dispatch = useDispatch();
+  const [isFavorite, setIsFavorite] = useState(false);
+  const [isDiscarded, setIsDiscarded] = useState(false);
+
+  const favoriteItems = useSelector((state) => state.items.favoriteItems);
+  const discardedItems = useSelector((state) => state.items.discardedItems);
+
+  useEffect(() => {
+    const isInFavorites = favoriteItems.find((item) => item.id === data.id);
+    const isInDiscarded = discardedItems.find((item) => item.id === data.id);
+
+    if (isInFavorites) setIsFavorite(true);
+    else setIsFavorite(false);
+
+    if (isInDiscarded) setIsDiscarded(true);
+    else setIsDiscarded(false);
+  }, [favoriteItems, discardedItems, data.id]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -21,29 +46,43 @@ const ActionButtons = () => {
     };
   }, [actionBar]);
 
-  if (actionBar.current) window.onscroll = () => {};
-
   const handleClick = (e) => {
     if (favoriteBtn.current.contains(e.target)) {
+      if (favoriteBtn.current.classList.contains("selected")) {
+        dispatch(removeFavoriteItem(data.id));
+      } else {
+        dispatch(addFavoriteItem(data));
+      }
       favoriteBtn.current.classList.toggle("selected");
       notInterestedBtn.current.classList.remove("selected");
-      //TODO: favorite item
     }
     if (notInterestedBtn.current.contains(e.target)) {
+      if (notInterestedBtn.current.classList.contains("selected")) {
+        dispatch(removeDiscardedItem(data.id));
+      } else {
+        dispatch(addDiscardedItem(data));
+      }
       notInterestedBtn.current.classList.toggle("selected");
       favoriteBtn.current.classList.remove("selected");
-      //TODO: item not of interest
     }
   };
 
   return (
     <div className="actions-container">
       <div className="actions" ref={actionBar}>
-        <button className="favorite" ref={favoriteBtn} onClick={handleClick}>
+        <button
+          className={`favorite ${isFavorite ? "selected" : ""}`}
+          ref={favoriteBtn}
+          onClick={handleClick}
+        >
           <IoHeartOutline />
           <IoHeart />
         </button>
-        <button className="not-interested" ref={notInterestedBtn} onClick={handleClick}>
+        <button
+          className={`not-interested ${isDiscarded ? "selected" : ""}`}
+          ref={notInterestedBtn}
+          onClick={handleClick}
+        >
           <IoBanOutline />
           <IoBan />
         </button>

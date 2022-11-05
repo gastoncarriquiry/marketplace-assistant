@@ -1,13 +1,40 @@
 import { useRef } from "react";
 import { IoBan, IoBanOutline, IoHeart, IoHeartOutline } from "react-icons/io5";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { transformImageUrl } from "../../utils/utils";
 import "./Result.css";
+import {
+  addDiscardedItem,
+  addFavoriteItem,
+  removeDiscardedItem,
+  removeFavoriteItem,
+} from "../../features/itemsSlice";
+import { useState } from "react";
+import { useEffect } from "react";
 
 const Result = ({ data }) => {
+  const { id, title, price, currency_id, location, attributes, thumbnail, condition } = data;
   const favoriteBtn = useRef(null);
   const notInterestedBtn = useRef(null);
-  const { id, title, price, currency_id, location, attributes, thumbnail, condition } = data;
+  const dispatch = useDispatch();
+  const [isFavorite, setIsFavorite] = useState(false);
+  const [isDiscarded, setIsDiscarded] = useState(false);
+
+  const favoriteItems = useSelector((state) => state.items.favoriteItems);
+  const discardedItems = useSelector((state) => state.items.discardedItems);
+
+  useEffect(() => {
+    const isInFavorites = favoriteItems.find((item) => item.id === data.id);
+    const isInDiscarded = discardedItems.find((item) => item.id === data.id);
+
+    if (isInFavorites) setIsFavorite(true);
+    else setIsFavorite(false);
+
+    if (isInDiscarded) setIsDiscarded(true);
+    else setIsDiscarded(false);
+  }, [favoriteItems, discardedItems, data.id]);
+
   const totalArea = attributes.find((attribute) => attribute.id === "TOTAL_AREA");
   const bathrooms = attributes.find((attribute) => attribute.id === "FULL_BATHROOMS");
   const bedrooms = () => {
@@ -20,14 +47,22 @@ const Result = ({ data }) => {
 
   const handleClick = (e) => {
     if (favoriteBtn.current.contains(e.target)) {
+      if (favoriteBtn.current.classList.contains("selected")) {
+        dispatch(removeFavoriteItem(data.id));
+      } else {
+        dispatch(addFavoriteItem(data));
+      }
       favoriteBtn.current.classList.toggle("selected");
       notInterestedBtn.current.classList.remove("selected");
-      //TODO: favorite item
     }
     if (notInterestedBtn.current.contains(e.target)) {
+      if (notInterestedBtn.current.classList.contains("selected")) {
+        dispatch(removeDiscardedItem(data.id));
+      } else {
+        dispatch(addDiscardedItem(data));
+      }
       notInterestedBtn.current.classList.toggle("selected");
       favoriteBtn.current.classList.remove("selected");
-      //TODO: item not of interest
     }
   };
 
@@ -70,11 +105,19 @@ const Result = ({ data }) => {
         </div>
       </Link>
       <div className="actions">
-        <button className="favorite" ref={favoriteBtn} onClick={handleClick}>
+        <button
+          className={`favorite ${isFavorite ? "selected" : ""}`}
+          ref={favoriteBtn}
+          onClick={handleClick}
+        >
           <IoHeartOutline />
           <IoHeart />
         </button>
-        <button className="not-interested" ref={notInterestedBtn} onClick={handleClick}>
+        <button
+          className={`not-interested ${isDiscarded ? "selected" : ""}`}
+          ref={notInterestedBtn}
+          onClick={handleClick}
+        >
           <IoBanOutline />
           <IoBan />
         </button>

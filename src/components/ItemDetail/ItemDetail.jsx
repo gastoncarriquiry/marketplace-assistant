@@ -33,7 +33,7 @@ const ItemDetail = () => {
   return (
     <section className="item-detail">
       <header>
-        <button onClick={() => navigate("/resultados")}>
+        <button onClick={() => navigate(-1)}>
           <IoChevronBack />
           Atrás
         </button>

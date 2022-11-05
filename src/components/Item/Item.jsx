@@ -45,7 +45,7 @@ const Item = ({ data, description }) => {
             </SwiperSlide>
           ))}
         </Swiper>
-        <ActionButtons />
+        <ActionButtons data={data} />
         <h2 className="price">
           {currency_id} {price}
         </h2>

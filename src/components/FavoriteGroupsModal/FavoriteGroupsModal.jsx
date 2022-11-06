@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addFavoriteGroup, addFavoriteItem, removeDiscardedItem } from "../../features/itemsSlice";
-import { saveLocalStorage } from "../../utils/utils";
+import { loadLocalStorage, saveLocalStorage } from "../../utils/utils";
 import Button from "../Button/Button";
 import "./FavoriteGroupsModal.css";
 
@@ -17,6 +17,7 @@ const FavoriteGroupsModal = ({ data, isVisible }) => {
   }, [favoriteGroups]);
 
   const handleClick = () => {
+    const favoriteGroups = loadLocalStorage("favoriteGroups");
     if (input.current.value === "") {
       if (Number(select.current.selectedOptions[0].value) === 0) input.current.focus();
       else {
@@ -34,21 +35,52 @@ const FavoriteGroupsModal = ({ data, isVisible }) => {
         modalContainer.current.classList.remove("visible");
       }
     } else {
-      dispatch(
-        addFavoriteItem({
-          ...data,
-          group: {
+      if (favoriteGroups && favoriteGroups.length !== 0) {
+        let existingGroup = favoriteGroups.find((group) => group.name === input.current.value);
+        if (existingGroup) {
+          dispatch(
+            addFavoriteItem({
+              ...data,
+              group: {
+                id: existingGroup.id,
+                name: existingGroup.name,
+              },
+            })
+          );
+        } else {
+          dispatch(
+            addFavoriteItem({
+              ...data,
+              group: {
+                id: favoriteGroups.length + 1,
+                name: input.current.value,
+              },
+            })
+          );
+          dispatch(
+            addFavoriteGroup({
+              id: favoriteGroups.length + 1,
+              name: input.current.value,
+            })
+          );
+        }
+      } else {
+        dispatch(
+          addFavoriteItem({
+            ...data,
+            group: {
+              id: favoriteGroups.length + 1,
+              name: input.current.value,
+            },
+          })
+        );
+        dispatch(
+          addFavoriteGroup({
             id: favoriteGroups.length + 1,
             name: input.current.value,
-          },
-        })
-      );
-      dispatch(
-        addFavoriteGroup({
-          id: favoriteGroups.length + 1,
-          name: input.current.value,
-        })
-      );
+          })
+        );
+      }
       dispatch(removeDiscardedItem(data.id));
       input.current.value = "";
       modalContainer.current.classList.add("hidden");

@@ -8,7 +8,7 @@ import "./Menu.css";
 const Menu = forwardRef((props, ref) => {
   const menuState = useSelector((state) => state.menu.menuState);
   const menu = useRef(null);
-  const [isVisible, setIsVisible] = useState(true);
+  const [isVisible, setIsVisible] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 

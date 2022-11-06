@@ -7,21 +7,19 @@ import SkeletonLoader from "../SkeletonLoader/SkeletonLoader";
 import "./ResultsList.css";
 
 const ResultsList = () => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [results, setResults] = useState([]);
   const query = useSelector((state) => state.search.query);
   const favoriteItems = useSelector((state) => state.items.favoriteItems);
   const discardedItems = useSelector((state) => state.items.discardedItems);
 
   useEffect(() => {
-    setIsLoading(true);
     const resultsStorage = loadLocalStorage("results");
-    if (resultsStorage === null || resultsStorage.length === 0) {
+    if (!resultsStorage || resultsStorage.length === 0) {
       saveLocalStorage("results", []);
       if (query !== "") fetchResults(0, []);
     } else {
       setResults(resultsStorage);
-      setIsLoading(false);
     }
   }, []);
 
@@ -41,6 +39,7 @@ const ResultsList = () => {
   }, [favoriteItems, discardedItems]);
 
   const fetchResults = (offset, arr) => {
+    setIsLoading(true);
     const url = "https://api.mercadolibre.com/sites/MLU/search?";
     const params = {
       q: query,

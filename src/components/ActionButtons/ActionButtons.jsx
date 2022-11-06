@@ -1,18 +1,15 @@
-import { useEffect } from "react";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { IoBan, IoBanOutline, IoHeart, IoHeartOutline } from "react-icons/io5";
+import { useDispatch, useSelector } from "react-redux";
 import {
   addDiscardedItem,
-  addFavoriteItem,
   removeDiscardedItem,
   removeFavoriteItem,
   setPreventReload,
 } from "../../features/itemsSlice";
-import { IoBan, IoBanOutline, IoHeart, IoHeartOutline } from "react-icons/io5";
-import "./ActionButtons.css";
-import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
-import FavoriteGroupsModal from "../FavoriteGroupsModal/FavoriteGroupsModal";
 import { loadLocalStorage } from "../../utils/utils";
+import FavoriteGroupsModal from "../FavoriteGroupsModal/FavoriteGroupsModal";
+import "./ActionButtons.css";
 
 const ActionButtons = ({ data }) => {
   const favoriteBtn = useRef(null);

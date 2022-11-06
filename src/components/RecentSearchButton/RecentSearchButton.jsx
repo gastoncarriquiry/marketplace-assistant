@@ -1,10 +1,10 @@
-import "./RecentSearchButton.css";
+import { IoClose } from "react-icons/io5";
 import { VscHistory } from "react-icons/vsc";
-import { formatDate, saveLocalStorage } from "../../utils/utils";
-import { setQuery, setRecentSearches } from "../../features/searchSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { IoClose } from "react-icons/io5";
+import { setQuery, setRecentSearches } from "../../features/searchSlice";
+import { formatDate, saveLocalStorage } from "../../utils/utils";
+import "./RecentSearchButton.css";
 
 const RecentSearchButton = ({ data }) => {
   const dispatch = useDispatch();

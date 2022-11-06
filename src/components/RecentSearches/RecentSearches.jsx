@@ -1,8 +1,8 @@
 import { useSelector } from "react-redux";
-import RecentSearchButton from "../RecentSearchButton/RecentSearchButton";
-import "./RecentSearches.css";
 import { FreeMode } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
+import RecentSearchButton from "../RecentSearchButton/RecentSearchButton";
+import "./RecentSearches.css";
 
 const RecentSearches = () => {
   const recentSearches = useSelector((state) => state.search.recentSearches);

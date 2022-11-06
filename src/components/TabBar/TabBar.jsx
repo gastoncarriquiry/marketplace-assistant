@@ -1,10 +1,10 @@
-import { NavLink } from "react-router-dom";
+import { useRef } from "react";
 import { IoHeart, IoHeartOutline, IoMenuOutline, IoSearch, IoSearchOutline } from "react-icons/io5";
-import "./TabBar.css";
 import { useDispatch, useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
 import { toggleMenuState } from "../../features/menuSlice";
 import Menu from "../Menu/Menu";
-import { useRef } from "react";
+import "./TabBar.css";
 
 const TabBar = () => {
   const dispatch = useDispatch();

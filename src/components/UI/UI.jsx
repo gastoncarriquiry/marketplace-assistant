@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Outlet } from "react-router-dom";
 import { setRecentSearches } from "../../features/searchSlice";
 import { loadLocalStorage, saveLocalStorage } from "../../utils/utils";

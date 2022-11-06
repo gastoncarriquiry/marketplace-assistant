@@ -1,7 +1,4 @@
-import { forwardRef } from "react";
-import { useState } from "react";
-import { useEffect } from "react";
-import { useRef } from "react";
+import { forwardRef, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { toggleMenuState } from "../../features/menuSlice";
@@ -30,7 +27,6 @@ const Menu = forwardRef((props, ref) => {
     document.addEventListener("click", handleOutsideClick);
 
     return () => document.removeEventListener("click", handleOutsideClick);
-    //eslint-disable-next-line
   }, [ref]);
 
   const toggleModal = () => setIsVisible(!isVisible);

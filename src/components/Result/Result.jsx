@@ -1,19 +1,16 @@
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { IoBan, IoBanOutline, IoHeart, IoHeartOutline } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { loadLocalStorage, transformImageUrl } from "../../utils/utils";
-import "./Result.css";
 import {
   addDiscardedItem,
-  addFavoriteItem,
   removeDiscardedItem,
   removeFavoriteItem,
   setPreventReload,
 } from "../../features/itemsSlice";
-import { useState } from "react";
-import { useEffect } from "react";
+import { loadLocalStorage, transformImageUrl } from "../../utils/utils";
 import FavoriteGroupsModal from "../FavoriteGroupsModal/FavoriteGroupsModal";
+import "./Result.css";
 
 const Result = ({ data }) => {
   const { id, title, price, currency_id, location, attributes, thumbnail, condition } = data;

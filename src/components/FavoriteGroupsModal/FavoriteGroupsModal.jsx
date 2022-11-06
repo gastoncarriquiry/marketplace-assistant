@@ -1,12 +1,6 @@
-import { useEffect } from "react";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  addFavoriteGroup,
-  addFavoriteItem,
-  removeDiscardedItem,
-  setPreventReload,
-} from "../../features/itemsSlice";
+import { addFavoriteGroup, addFavoriteItem, removeDiscardedItem } from "../../features/itemsSlice";
 import { saveLocalStorage } from "../../utils/utils";
 import Button from "../Button/Button";
 import "./FavoriteGroupsModal.css";
@@ -23,7 +17,7 @@ const FavoriteGroupsModal = ({ data, isVisible }) => {
   }, [favoriteGroups]);
 
   const handleClick = () => {
-    if (input.current.value == "") {
+    if (input.current.value === "") {
       if (Number(select.current.selectedOptions[0].value) === 0) input.current.focus();
       else {
         dispatch(

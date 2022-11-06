@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IoChevronDown } from "react-icons/io5";
 import { useSelector } from "react-redux";
 import { loadLocalStorage, saveLocalStorage } from "../../utils/utils";

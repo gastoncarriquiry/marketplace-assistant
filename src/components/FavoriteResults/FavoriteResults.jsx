@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IoChevronBack } from "react-icons/io5";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -22,7 +21,6 @@ const Favorites = () => {
       setFavoriteGroups(groupsStorage);
     }
     setIsLoading(false);
-    //eslint-disable-next-line
   }, []);
 
   useEffect(() => {

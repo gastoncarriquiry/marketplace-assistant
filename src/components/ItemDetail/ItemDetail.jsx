@@ -39,11 +39,7 @@ const ItemDetail = () => {
         </button>
       </header>
       <div className="container">
-        {isLoading ? (
-          <SkeletonLoader />
-        ) : (
-          <Item key={data[0].id} data={data[0]} description={data[1].plain_text} />
-        )}
+        {isLoading ? <SkeletonLoader /> : <Item data={data[0]} description={data[1].plain_text} />}
       </div>
     </section>
   );

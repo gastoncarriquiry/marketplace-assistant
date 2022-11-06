@@ -1,15 +1,15 @@
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination, Navigation, Lazy } from "swiper";
-import "swiper/css";
-import "swiper/css/lazy";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
-import "./Item.css";
-import ImageSlide from "../ImageSlide/ImageSlide";
 import { IoBedOutline, IoExpand } from "react-icons/io5";
 import { TbBath } from "react-icons/tb";
-import Button from "../Button/Button";
+import { Lazy, Navigation, Pagination } from "swiper";
+import "swiper/css";
+import "swiper/css/lazy";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import { Swiper, SwiperSlide } from "swiper/react";
 import ActionButtons from "../ActionButtons/ActionButtons";
+import Button from "../Button/Button";
+import ImageSlide from "../ImageSlide/ImageSlide";
+import "./Item.css";
 
 const Item = ({ data, description }) => {
   const { title, price, currency_id, location, attributes, condition } = data;

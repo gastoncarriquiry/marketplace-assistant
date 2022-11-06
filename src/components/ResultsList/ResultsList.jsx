@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { apiToJson, buildUrl, loadLocalStorage, saveLocalStorage } from "../../utils/utils";
@@ -24,11 +23,9 @@ const ResultsList = () => {
       setResults(resultsStorage);
       setIsLoading(false);
     }
-    //eslint-disable-next-line
   }, []);
 
   useEffect(() => {
-    console.log(loadLocalStorage("results"));
     if (favoriteItems && discardedItems) {
       const mergedArray = [...favoriteItems, ...discardedItems];
       const resultsArray = loadLocalStorage("results");

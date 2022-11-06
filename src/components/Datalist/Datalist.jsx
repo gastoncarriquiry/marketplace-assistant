@@ -1,8 +1,7 @@
-import { useRef } from "react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
-import { zonesList } from "../../utils/zones";
 import { selectZone } from "../../features/searchSlice";
+import { zonesList } from "../../utils/zones";
 import "./Datalist.css";
 
 const Datalist = () => {

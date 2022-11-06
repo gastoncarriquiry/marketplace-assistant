@@ -1,6 +1,5 @@
 import { Provider } from "react-redux";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
 import "./App.css";
 import Error404 from "./components/Error404/Error404";
 import FavoriteResults from "./components/FavoriteResults/FavoriteResults";
@@ -27,17 +26,6 @@ function App() {
           <Route path="/*" element={<Navigate to="/error404" />} />
           <Route path="/error404" element={<Error404 />} />
         </Routes>
-        <ToastContainer
-          position="bottom-right"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-        />
       </BrowserRouter>
     </Provider>
   );

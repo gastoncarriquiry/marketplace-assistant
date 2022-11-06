@@ -1,0 +1,45 @@
+.error404 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 85vh;
+    padding-bottom: 15vh;
+    background-color: var(--tertiary-color);
+    color: var(--background-color);
+}
+
+.error404 h1 {
+    font-size: 3rem;
+}
+
+.error404 h2 {
+    font-size: 1.2rem;
+    width: 75%;
+    margin-bottom: 1rem;
+}
+
+.error404 .useful-links {
+    width: 75%;
+}
+
+.error404 .useful-links p {
+    margin-bottom: 0.5rem;
+}
+
+.error404 .useful-links ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.error404 .useful-links ul a {
+    color: var(--tertiary-color);
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    background-color: var(--primary-color);
+    padding: 0.3rem 1rem;
+    border-radius: 5px;
+}

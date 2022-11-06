@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { addRecentSearch, setPreventReload, setQuery } from "../../features/searchSlice";
-import { buildQuery, saveLocalStorage } from "../../utils/utils";
+import { buildQuery, loadLocalStorage, saveLocalStorage } from "../../utils/utils";
 import Button from "../Button/Button";
 import Datalist from "../Datalist/Datalist";
 import "./SearchForm.css";
@@ -30,13 +30,23 @@ const SearchForm = () => {
   const handleSearch = () => {
     dispatch(setPreventReload(true));
     saveLocalStorage("results", []);
-    dispatch(
-      addRecentSearch({
-        id: recentSearches.length + 1,
-        date: new Date().getTime(),
-        query: buildQuery(opType.current.value, propType.current.value, zone),
-      })
-    );
+    const recentSearches = loadLocalStorage("recentSearches");
+    if (recentSearches && recentSearches.length !== 0) {
+      let existingSearch = recentSearches.find(
+        (search) => search.query === buildQuery(opType.current.value, propType.current.value, zone)
+      );
+
+      if (!existingSearch) {
+        dispatch(
+          addRecentSearch({
+            id: recentSearches.length + 1,
+            date: new Date().getTime(),
+            query: buildQuery(opType.current.value, propType.current.value, zone),
+          })
+        );
+      }
+    } else {
+    }
     dispatch(setQuery(buildQuery(opType.current.value, propType.current.value, zone)));
     navigate("/resultados");
   };

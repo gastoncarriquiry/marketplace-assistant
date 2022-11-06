@@ -13,17 +13,15 @@ const RecentSearches = () => {
   const preventReload = useSelector((state) => state.search.preventReload);
 
   useEffect(() => {
-    const recentSearchesStorage = loadLocalStorage("recentSearches");
-
-    if (!recentSearchesStorage || recentSearchesStorage.length === 0) {
-      saveLocalStorage("recentSearches", []);
-    } else {
-      setRecentSearches(recentSearchesStorage);
-    }
+    if (preventReload) saveLocalStorage("recentSearches", recentSearchesState);
   }, [recentSearchesState]);
 
   useEffect(() => {
-    if (preventReload) saveLocalStorage("recentSearches", recentSearchesState);
+    const recentSearchesStorage = loadLocalStorage("recentSearches");
+    if (!recentSearchesStorage || recentSearchesStorage.length === 0) {
+      saveLocalStorage("recentSearches", []);
+    }
+    setRecentSearches(recentSearchesStorage);
   }, [recentSearchesState]);
 
   return recentSearches.length ? (

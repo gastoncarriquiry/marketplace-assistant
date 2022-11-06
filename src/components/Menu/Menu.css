@@ -20,6 +20,68 @@
     animation: slide-out 0.4s ease-in-out normal forwards;
 }
 
+.menu-list ul {
+    width: 80%;
+    margin: auto;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+}
+
+.menu-list ul li {
+    padding: 0.75rem 0.3rem;
+    border-bottom: 1px solid var(--tertiary-color);
+    transition: background-color 0.15s;
+    cursor: pointer;
+}
+
+.menu-list ul li:hover {
+    background-color: var(--primary-color);
+}
+
+.menu-list ul li a {
+    color: var(--tertiary-color);
+    text-decoration: none;
+}
+
+.menu-list .modal-container .modal h2 {
+    font-size: 1.2rem;
+}
+
+.menu-list .modal-container .modal div.buttons {
+    flex-direction: row;
+    column-gap: 1rem;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.menu-list .modal-container .modal .btn {
+    width: auto;
+    margin-top: 0;
+}
+
+.menu-list .modal-container .modal div.buttons button:first-child {
+    background-color: rgb(236, 58, 58);
+    color: var(--background-color);
+    border-radius: 5px;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.5rem;
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    outline: none;
+    box-sizing: border-box;
+    border: 3px solid rgb(236, 58, 58);
+    transition: color 0.2s;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+}
+
 @keyframes slide-in {
     0% {
         right: -70vw;

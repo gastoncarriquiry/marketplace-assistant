@@ -26,10 +26,22 @@ export const searchSlice = createSlice({
     addRecentSearch: (state, action) => {
       state.recentSearches.push(action.payload);
     },
+    resetSearchSlice: (state) => {
+      state.query = initialState.query;
+      state.selectedZone = initialState.selectedZone;
+      state.recentSearches = initialState.recentSearches;
+      state.preventReload = initialState.preventReload;
+    },
   },
 });
 
-export const { selectZone, setQuery, setRecentSearches, addRecentSearch, setPreventReload } =
-  searchSlice.actions;
+export const {
+  selectZone,
+  setQuery,
+  setRecentSearches,
+  addRecentSearch,
+  setPreventReload,
+  resetSearchSlice,
+} = searchSlice.actions;
 
 export default searchSlice.reducer;

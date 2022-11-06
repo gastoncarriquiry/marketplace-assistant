@@ -1,7 +1,9 @@
 import { forwardRef, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { resetItemsSlice } from "../../features/itemsSlice";
 import { toggleMenuState } from "../../features/menuSlice";
+import { resetSearchSlice } from "../../features/searchSlice";
 import Button from "../Button/Button";
 import "./Menu.css";
 
@@ -36,6 +38,8 @@ const Menu = forwardRef((props, ref) => {
     localStorage.clear();
     setIsVisible(false);
     navigate("/");
+    dispatch(resetItemsSlice());
+    dispatch(resetSearchSlice());
   };
 
   return (

@@ -13,6 +13,10 @@ const Datalist = () => {
   const [filteredQuery, setFilteredQuery] = useState([]);
 
   useEffect(() => {
+    if (query.current.value === "") dispatch(selectZone(""));
+  }, []);
+
+  useEffect(() => {
     setZones(zonesList);
   }, [zones]);
 
@@ -20,7 +24,6 @@ const Datalist = () => {
     setSearchQuery(query.current.value);
     let keyword = query.current.value.toLowerCase();
     setFilteredQuery(
-      //eslint-disable-next-line
       zones.filter((zone) => {
         if (zone.name.toLowerCase().includes(keyword)) return zone;
       })

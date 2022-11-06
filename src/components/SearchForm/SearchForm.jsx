@@ -10,9 +10,8 @@ import "./SearchForm.css";
 const SearchForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const recentSearches = useSelector((state) => state.search.recentSearches);
-  const preventReload = useSelector((state) => state.search.preventReload);
   const zone = useSelector((state) => state.search.selectedZone);
+  const recentSearchesState = useSelector((state) => state.search.recentSearches);
   const [isDisabled, setIsDisabled] = useState(false);
   const opType = useRef(null);
   const propType = useRef(null);
@@ -21,34 +20,37 @@ const SearchForm = () => {
     zone !== "" ? setIsDisabled(false) : setIsDisabled(true);
   }, [zone]);
 
-  useEffect(() => {
-    setTimeout(() => {
-      if (preventReload) saveLocalStorage("recentSearches", recentSearches);
-    }, 1000);
-  }, [recentSearches]);
-
   const handleSearch = () => {
-    dispatch(setPreventReload(true));
-    saveLocalStorage("results", []);
-    const recentSearches = loadLocalStorage("recentSearches");
-    if (recentSearches && recentSearches.length !== 0) {
-      let existingSearch = recentSearches.find(
-        (search) => search.query === buildQuery(opType.current.value, propType.current.value, zone)
-      );
-
-      if (!existingSearch) {
+    if (!isDisabled) {
+      dispatch(setPreventReload(true));
+      saveLocalStorage("results", []);
+      const recentSearchesStorage = loadLocalStorage("recentSearches");
+      if (recentSearchesStorage && recentSearchesStorage.length !== 0) {
+        let existingSearch = recentSearchesStorage.find(
+          (search) =>
+            search.query === buildQuery(opType.current.value, propType.current.value, zone)
+        );
+        if (!existingSearch) {
+          dispatch(
+            addRecentSearch({
+              id: recentSearchesStorage.length + 1,
+              date: new Date().getTime(),
+              query: buildQuery(opType.current.value, propType.current.value, zone),
+            })
+          );
+        }
+      } else {
         dispatch(
           addRecentSearch({
-            id: recentSearches.length + 1,
+            id: recentSearchesState.length + 1,
             date: new Date().getTime(),
             query: buildQuery(opType.current.value, propType.current.value, zone),
           })
         );
       }
-    } else {
+      dispatch(setQuery(buildQuery(opType.current.value, propType.current.value, zone)));
+      navigate("/resultados");
     }
-    dispatch(setQuery(buildQuery(opType.current.value, propType.current.value, zone)));
-    navigate("/resultados");
   };
 
   return (

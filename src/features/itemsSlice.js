@@ -17,12 +17,6 @@ export const itemsSlice = createSlice({
     addFavoriteGroup: (state, action) => {
       state.favoriteGroups.push(action.payload);
     },
-    setFavoriteItems: (state, action) => {
-      state.favoriteItems = action.payload;
-    },
-    setDiscardedItems: (state, action) => {
-      state.discardedItems = action.payload;
-    },
     addFavoriteItem: (state, action) => {
       state.favoriteItems.push(action.payload);
     },
@@ -37,18 +31,23 @@ export const itemsSlice = createSlice({
       const filteredArray = state.discardedItems.filter((item) => item.id !== action.payload);
       state.discardedItems = filteredArray;
     },
+    resetItemsSlice: (state) => {
+      state.favoriteItems = initialState.favoriteItems;
+      state.favoriteGroups = initialState.favoriteGroups;
+      state.discardedItems = initialState.discardedItems;
+      state.preventReload = initialState.preventReload;
+    },
   },
 });
 
 export const {
-  setDiscardedItems,
-  setFavoriteItems,
   addDiscardedItem,
   addFavoriteItem,
   removeDiscardedItem,
   removeFavoriteItem,
   addFavoriteGroup,
   setPreventReload,
+  resetItemsSlice,
 } = itemsSlice.actions;
 
 export default itemsSlice.reducer;

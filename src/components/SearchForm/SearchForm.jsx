@@ -56,7 +56,7 @@ const SearchForm = () => {
   return (
     <div className="search-form">
       <div>
-        <h1>Encontrá el inmueble que buscás</h1>
+        <h2>Encontrá el inmueble que buscás</h2>
         <div>
           <label htmlFor="operation-type">Tipo de operación</label>
           <select className="input" id="operation-type" ref={opType}>

@@ -20,8 +20,10 @@ const RecentSearches = () => {
     const recentSearchesStorage = loadLocalStorage("recentSearches");
     if (!recentSearchesStorage || recentSearchesStorage.length === 0) {
       saveLocalStorage("recentSearches", []);
+      setRecentSearches([]);
+    } else {
+      setRecentSearches(recentSearchesStorage);
     }
-    setRecentSearches(recentSearchesStorage);
   }, [recentSearchesState]);
 
   return recentSearches.length ? (

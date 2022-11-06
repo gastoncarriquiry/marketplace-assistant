@@ -1,11 +1,12 @@
 .intro .search-form {
-    height: 100vh;
+    height: 75vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 2rem;
 }
 
-.intro .search-form h1 {
+.intro .search-form h2 {
     font-size: 1rem;
     color: var(--text-color);
 }

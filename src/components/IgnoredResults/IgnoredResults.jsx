@@ -15,7 +15,6 @@ const IgnoredResults = () => {
 
   useEffect(() => {
     if (preventReload) saveLocalStorage("discardedItems", discardedItemsState);
-    console.log(discardedItems);
   }, [discardedItemsState]);
 
   useEffect(() => {
@@ -24,12 +23,9 @@ const IgnoredResults = () => {
     if (!discardedStorage || discardedStorage.length === 0) {
       saveLocalStorage("discardedItems", []);
       setDiscardedItems([]);
-      console.log(discardedItems);
     } else {
       setDiscardedItems(discardedStorage);
-      console.log(discardedItems);
     }
-    console.log(discardedItems);
     setIsLoading(false);
   }, [discardedItemsState]);
 

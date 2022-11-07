@@ -22,7 +22,7 @@ const IgnoredResults = () => {
     let discardedStorage = loadLocalStorage("discardedItems");
     if (!discardedStorage || discardedStorage.length === 0) {
       saveLocalStorage("discardedItems", []);
-      setDiscardedItems(discardedStorage);
+      setDiscardedItems([]);
     } else {
       setDiscardedItems(discardedStorage);
     }

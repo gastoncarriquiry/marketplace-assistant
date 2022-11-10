@@ -82,6 +82,38 @@
     padding: 0.5rem 1rem;
 }
 
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+    .menu-list {
+        width: 60vw;
+    }
+
+    .menu-list .modal-container .modal {
+        width: 40%;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {}
+
+@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+    .menu-list {
+        width: 30vw;
+    }
+
+    .menu-list .modal-container .modal {
+        width: 30%;
+    }
+}
+
+@media only screen and (min-width: 1281px) {
+    .menu-list {
+        width: 25vw;
+    }
+
+    .menu-list .modal-container .modal {
+        width: 25%;
+    }
+}
+
 @keyframes slide-in {
     0% {
         right: -70vw;

@@ -58,3 +58,23 @@
     color: var(--tertiary-color);
     margin-bottom: 5px;
 }
+
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+    .tab-bar a.search {
+        width: 15%;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {}
+
+@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+    .tab-bar a.search {
+        width: 10%;
+    }
+}
+
+@media only screen and (min-width: 1281px) {
+    .tab-bar a.search {
+        width: 8%;
+    }
+}

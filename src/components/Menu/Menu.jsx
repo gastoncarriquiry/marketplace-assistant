@@ -45,11 +45,15 @@ const Menu = forwardRef((props, ref) => {
   return (
     <div ref={menu} className={`menu-list ${menuState ? "deployed" : "retracted"}`}>
       <ul>
-        <li onClick={handleClick}>
-          <Link to="/">Ir a inicio</Link>
+        <li>
+          <Link to="/" onClick={handleClick}>
+            Ir a inicio
+          </Link>
         </li>
-        <li onClick={handleClick}>
-          <Link to="/descartados">Lista de descartados</Link>
+        <li>
+          <Link to="/descartados" onClick={handleClick}>
+            Lista de descartados
+          </Link>
         </li>
         <li onClick={toggleModal}>Eliminar datos</li>
       </ul>

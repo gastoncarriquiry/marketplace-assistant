@@ -6,15 +6,15 @@ import Button from "../Button/Button";
 import "./FavoriteGroupsModal.css";
 
 const FavoriteGroupsModal = ({ data, isVisible }) => {
-  const favoriteGroups = useSelector((state) => state.items.favoriteGroups);
+  const favoriteGroupsState = useSelector((state) => state.items.favoriteGroups);
   const dispatch = useDispatch();
   const input = useRef(null);
   const select = useRef(null);
   const modalContainer = useRef(null);
 
   useEffect(() => {
-    if (favoriteGroups.length) saveLocalStorage("favoriteGroups", favoriteGroups);
-  }, [favoriteGroups]);
+    if (favoriteGroupsState.length) saveLocalStorage("favoriteGroups", favoriteGroupsState);
+  }, [favoriteGroupsState]);
 
   const handleClick = () => {
     const favoriteGroups = loadLocalStorage("favoriteGroups");
@@ -69,14 +69,14 @@ const FavoriteGroupsModal = ({ data, isVisible }) => {
           addFavoriteItem({
             ...data,
             group: {
-              id: favoriteGroups.length + 1,
+              id: favoriteGroupsState.length + 1,
               name: input.current.value,
             },
           })
         );
         dispatch(
           addFavoriteGroup({
-            id: favoriteGroups.length + 1,
+            id: favoriteGroupsState.length + 1,
             name: input.current.value,
           })
         );
@@ -98,8 +98,8 @@ const FavoriteGroupsModal = ({ data, isVisible }) => {
             <option value={0} selected disabled>
               -- Selecione una colección --
             </option>
-            {favoriteGroups.length ? (
-              favoriteGroups.map((group) => (
+            {favoriteGroupsState.length ? (
+              favoriteGroupsState.map((group) => (
                 <option key={group.id} value={group.id}>
                   {group.name}
                 </option>

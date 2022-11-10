@@ -5,6 +5,7 @@
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+    padding-bottom: 1rem;
 }
 
 .results .no-search {
@@ -28,4 +29,27 @@
     background-color: var(--primary-color);
     padding: 0.3rem 1rem;
     border-radius: 5px;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+    .results {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {}
+
+@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+    .results {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+}
+
+@media only screen and (min-width: 1281px) {
+    .results {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
 }

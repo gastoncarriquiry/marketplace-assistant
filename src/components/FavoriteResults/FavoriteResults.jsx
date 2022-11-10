@@ -11,6 +11,7 @@ const Favorites = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [favoriteGroups, setFavoriteGroups] = useState([]);
   const favoriteGroupsState = useSelector((state) => state.items.favoriteGroups);
+  const preventReload = useSelector((state) => state.items.preventReload);
 
   useEffect(() => {
     setIsLoading(true);
@@ -24,7 +25,7 @@ const Favorites = () => {
   }, []);
 
   useEffect(() => {
-    if (favoriteGroupsState.length) saveLocalStorage("favoriteGroups", favoriteGroupsState);
+    if (preventReload) saveLocalStorage("favoriteGroups", favoriteGroupsState);
   }, [favoriteGroupsState]);
 
   return (

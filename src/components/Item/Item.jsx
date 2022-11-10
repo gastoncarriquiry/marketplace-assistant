@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { useState } from "react";
 import { IoBedOutline, IoExpand } from "react-icons/io5";
 import { TbBath } from "react-icons/tb";
 import { Lazy, Navigation, Pagination } from "swiper";
@@ -12,6 +14,7 @@ import ImageSlide from "../ImageSlide/ImageSlide";
 import "./Item.css";
 
 const Item = ({ data, description }) => {
+  const [descriptionText, setDescriptionText] = useState(undefined);
   const { title, price, currency_id, location, attributes, condition } = data;
   const totalArea = attributes.find((attribute) => attribute.id === "TOTAL_AREA");
   const bathrooms = attributes.find((attribute) => attribute.id === "FULL_BATHROOMS");
@@ -21,6 +24,11 @@ const Item = ({ data, description }) => {
     if (Number(bedrooms.value_name) !== 0) return Number(bedrooms.value_name);
     else return Number(rooms.value_name);
   };
+
+  useEffect(() => {
+    setDescriptionText(description?.replaceAll("\n", `<br />`));
+  }, [description]);
+
   return (
     <div className="item">
       <div className="main-info">
@@ -93,10 +101,14 @@ const Item = ({ data, description }) => {
       ) : (
         <></>
       )}
-      <div className="description">
-        <h2>Descripción</h2>
-        <p>{description}</p>
-      </div>
+      {!descriptionText ? (
+        <></>
+      ) : (
+        <div className="description">
+          <h2>Descripción</h2>
+          <p dangerouslySetInnerHTML={{ __html: descriptionText }} />
+        </div>
+      )}
     </div>
   );
 };

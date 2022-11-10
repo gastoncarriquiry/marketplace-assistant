@@ -43,3 +43,15 @@
     font-size: 0.9rem;
     font-weight: 600;
 }
+
+@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+    .search-results header {
+        padding: 0.5rem 4em;
+    }
+}
+
+@media only screen and (min-width: 1281px) {
+    .search-results header {
+        padding: 0.5rem 4.5em;
+    }
+}

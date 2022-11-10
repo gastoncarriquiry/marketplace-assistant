@@ -43,3 +43,33 @@
     padding: 0.3rem 1rem;
     border-radius: 5px;
 }
+
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+    .error404 h2 {
+        width: 50%;
+    }
+
+    .error404 .useful-links {
+        width: 50%;
+    }
+}
+
+@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+    .error404 h2 {
+        width: 30%;
+    }
+
+    .error404 .useful-links {
+        width: 30%;
+    }
+}
+
+@media only screen and (min-width: 1281px) {
+    .error404 h2 {
+        width: 25%;
+    }
+
+    .error404 .useful-links {
+        width: 25%;
+    }
+}
